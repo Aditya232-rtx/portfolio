@@ -22,9 +22,16 @@ const interTight = Inter_Tight({
 const NAME = `${IDENTITY.firstName} ${IDENTITY.lastName}`
 
 export const metadata: Metadata = {
-  title: `${NAME} — Software Developer`,
+  metadataBase: new URL('https://jadhavaditya.com'),
+  title: {
+    default: `${NAME} — Software Developer`,
+    template: `%s | ${NAME}`,
+  },
   description:
     'Software developer building backend services, agent systems and data pipelines, with a focus on correctness, observability and production reliability.',
+  alternates: {
+    canonical: '/',
+  },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -36,7 +43,21 @@ export const metadata: Metadata = {
     title: `${NAME} — Software Developer`,
     description:
       'Backend services, agent systems and data pipelines built for production.',
+    url: 'https://jadhavaditya.com',
+    siteName: `${NAME} — Portfolio`,
     type: 'website',
+    locale: 'en_IN',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${NAME} — Software Developer`,
+    description:
+      'Backend services, agent systems and data pipelines built for production.',
+    creator: '@jadhavadityaa',
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 }
 
