@@ -39,3 +39,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# screen recordings - do not commit (user request: exclude screenrecording in /public)
+# Ignores video files placed directly in /public (e.g. Screen Recording, screenrecording.mp4)
+/public/*.mp4
+/public/*.mov
+/public/*.webm
+/public/Screen*.mp4
+/public/Screen*.mov
+/public/screenrecording*
+/public/Screen*Recording*
+**/screenrecording*
+**/Screen*Recording*
+
+# dev artifacts - not part of portfolio deploy (raw captures, reference scrape, local claude config)
+/_incoming/
+/_reference/
+/.claude/
+*.trace

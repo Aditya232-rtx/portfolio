@@ -1,0 +1,291 @@
+/**
+ * Horizontal project marquee — the hirotos.com/projects pattern, rebuilt on the
+ * bleibtgleich token system so it shares the site's grid and scaling.
+ * See docs/PROJECTS-PATTERN.md §3.
+ *
+ * Sizes below are expressed as "pixels at the 1440 design width" via
+ * calc(Nrem / --scale-ratio), since html { font-size: 1vw }.
+ */
+
+.section {
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: var(--u-24);
+  padding: var(--u-40) var(--u-36);
+  overflow: hidden;
+}
+
+/* ---- intro ------------------------------------------------------------- */
+
+.intro {
+  position: relative;
+  z-index: 1;
+  width: calc(460rem / var(--scale-ratio));
+  max-width: 100%;
+  margin-top: var(--u-48);
+}
+
+.kicker {
+  margin: 0 0 var(--u-12);
+  font-size: calc(12rem / var(--scale-ratio));
+  line-height: 1;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--black-50);
+}
+
+.title {
+  margin: 0;
+  font-size: calc(33rem / var(--scale-ratio));
+  line-height: 1.08;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--content-primary);
+}
+
+.title span {
+  display: block;
+}
+
+/* ---- gallery ----------------------------------------------------------- */
+
+.gallery {
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  height: 100%;
+  min-height: 0;
+  margin-left: calc(var(--u-36) * -1);
+  overflow: visible;
+  touch-action: none;
+}
+
+.marquee {
+  position: absolute;
+  inset: 0 calc(var(--u-56) * -1);
+  overflow: visible;
+  contain: layout;
+}
+
+.track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+  animation: marqueeLoop var(--marquee-duration, 38s) linear infinite;
+}
+
+/* Content is periodic with a period of one set; travelling exactly half the
+   track (an integer number of sets) makes the wrap invisible. */
+@keyframes marqueeLoop {
+  from {
+    transform: translate3d(0, -50%, 0);
+  }
+  to {
+    transform: translate3d(-50%, -50%, 0);
+  }
+}
+
+.marquee:hover .track,
+.marquee:focus-within .track {
+  animation-play-state: paused;
+}
+
+.set {
+  --gallery-gap: var(--u-32);
+  display: flex;
+  align-items: center;
+  gap: var(--gallery-gap);
+  padding-right: var(--gallery-gap);
+}
+
+/* ---- cards ------------------------------------------------------------- */
+
+.item {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.72;
+  transition:
+    opacity 0.26s,
+    transform 0.42s var(--ease-zoom);
+}
+
+.item:hover,
+.item:focus-visible {
+  opacity: 1;
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--content-primary);
+  outline-offset: var(--u-6);
+}
+
+/* The three shapes of the L · P · L · P · WIDE · P · L · P rhythm. */
+.landscape {
+  width: calc(302rem / var(--scale-ratio));
+  height: calc(215rem / var(--scale-ratio));
+}
+
+.portrait {
+  width: calc(199rem / var(--scale-ratio));
+  height: calc(262rem / var(--scale-ratio));
+}
+
+.wide {
+  width: calc(345rem / var(--scale-ratio));
+  height: calc(202rem / var(--scale-ratio));
+}
+
+.card {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.figure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #e9e6df;
+}
+
+.figure img,
+.figure video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Sits slightly over-scaled at rest so the hover push never shows an edge. */
+  transform: scale(1.015);
+  transition: transform 0.52s var(--ease-zoom);
+}
+
+.item:hover .figure img,
+.item:hover .figure video,
+.item:focus-visible .figure img,
+.item:focus-visible .figure video {
+  transform: scale(1.06);
+}
+
+.figure video {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition:
+    opacity 0.26s,
+    transform 0.52s var(--ease-zoom);
+}
+
+.item:hover .figure video[data-ready='true'] {
+  opacity: 1;
+}
+
+/* Status pill for work in progress */
+.status {
+  position: absolute;
+  left: var(--u-8);
+  bottom: var(--u-8);
+  z-index: 2;
+  padding: var(--u-4) var(--u-8);
+  font-size: calc(10rem / var(--scale-ratio));
+  line-height: 1;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--white-100);
+  background: var(--black-100);
+  border-radius: 999px;
+}
+
+/* ---- hover label ------------------------------------------------------- */
+
+.label {
+  position: relative;
+  min-height: calc(34rem / var(--scale-ratio));
+}
+
+.labelInner {
+  opacity: 0;
+  transform: translateY(var(--u-6));
+  transition:
+    opacity 0.18s,
+    transform 0.36s var(--ease-zoom);
+}
+
+.labelInner[data-visible='true'] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.labelTags {
+  font-size: calc(11rem / var(--scale-ratio));
+  line-height: 1;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.52);
+}
+
+.labelName {
+  margin-top: var(--u-6);
+  font-size: calc(14rem / var(--scale-ratio));
+  line-height: 1;
+  font-weight: 500;
+  color: var(--content-primary);
+}
+
+/* ---- cursor pill ------------------------------------------------------- */
+
+.pill {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: var(--u-6);
+  padding: var(--u-8) var(--u-12);
+  font-size: calc(11rem / var(--scale-ratio));
+  line-height: 1;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--white-100);
+  background: var(--black-100);
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+.pill[data-visible='true'] {
+  opacity: 1;
+}
+
+@media (max-width: 991px) {
+  .section {
+    padding: var(--u-20) var(--u-16);
+    gap: var(--u-16);
+  }
+
+  .intro {
+    width: 100%;
+    margin-top: var(--u-24);
+  }
+
+  .gallery {
+    margin-left: calc(var(--u-16) * -1);
+  }
+
+  .pill {
+    display: none;
+  }
+}

@@ -1,0 +1,19 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  height: 100%;
+  padding-inline: var(--page-padding);
+}
+
+.column {
+  height: 100%;
+  background: rgba(255, 0, 0, 0.06);
+}

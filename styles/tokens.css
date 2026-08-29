@@ -1,0 +1,182 @@
+/**
+ * Design tokens — ported 1:1 from bleibtgleich.dev.
+ * See docs/REFERENCE.md §2–§5 for the measurements these come from.
+ *
+ * The whole system is viewport-proportional rather than breakpoint-based:
+ * `html { font-size: 1vw }` plus a scale ratio equal to (design width / 100),
+ * so `--16px` resolves to exactly 16px at the design width and scales linearly
+ * everywhere else.
+ */
+
+:root {
+  /* 1440 / 100 — desktop design width */
+  --scale-ratio: 14.4;
+
+  /* ---- spacing scale ------------------------------------------------ */
+  --u-0: calc(0rem / var(--scale-ratio));
+  --u-1: calc(1rem / var(--scale-ratio));
+  --u-2: calc(2rem / var(--scale-ratio));
+  --u-4: calc(4rem / var(--scale-ratio));
+  --u-6: calc(6rem / var(--scale-ratio));
+  --u-8: calc(8rem / var(--scale-ratio));
+  --u-10: calc(10rem / var(--scale-ratio));
+  --u-12: calc(12rem / var(--scale-ratio));
+  --u-16: calc(16rem / var(--scale-ratio));
+  --u-20: calc(20rem / var(--scale-ratio));
+  --u-24: calc(24rem / var(--scale-ratio));
+  --u-28: calc(28rem / var(--scale-ratio));
+  --u-32: calc(32rem / var(--scale-ratio));
+  --u-36: calc(36rem / var(--scale-ratio));
+  --u-40: calc(40rem / var(--scale-ratio));
+  --u-44: calc(44rem / var(--scale-ratio));
+  --u-48: calc(48rem / var(--scale-ratio));
+  --u-52: calc(52rem / var(--scale-ratio));
+  --u-56: calc(56rem / var(--scale-ratio));
+  --u-60: calc(60rem / var(--scale-ratio));
+  --u-64: calc(64rem / var(--scale-ratio));
+  --u-68: calc(68rem / var(--scale-ratio));
+  --u-72: calc(72rem / var(--scale-ratio));
+  --u-80: calc(80rem / var(--scale-ratio));
+  --u-88: calc(88rem / var(--scale-ratio));
+  --u-96: calc(96rem / var(--scale-ratio));
+  --u-104: calc(104rem / var(--scale-ratio));
+  --u-112: calc(112rem / var(--scale-ratio));
+  --u-120: calc(120rem / var(--scale-ratio));
+  --u-128: calc(128rem / var(--scale-ratio));
+  --u-144: calc(144rem / var(--scale-ratio));
+  --u-168: calc(168rem / var(--scale-ratio));
+  --u-192: calc(192rem / var(--scale-ratio));
+  --u-200: calc(200rem / var(--scale-ratio));
+  --u-240: calc(240rem / var(--scale-ratio));
+
+  /* ---- grid ---------------------------------------------------------- */
+  /* 8 × 162 + 7 × 16 + 2 × 16 = 1440 exactly */
+  --cell: calc(162rem / var(--scale-ratio));
+  --grid-gap: var(--u-16);
+  --page-padding: var(--u-16);
+  --grid-columns: 8;
+  --stroke: calc(0.25rem / var(--scale-ratio));
+
+  /* ---- type ---------------------------------------------------------- */
+  --font-body: var(--font-inter-tight), Arial, sans-serif;
+  --font-display: var(--font-inter-tight), Arial, sans-serif;
+
+  --h1-size: calc(90rem / var(--scale-ratio));
+  --h1-line-height: 88%;
+  --h1-letter-spacing: -0.30938rem;
+
+  --h2-size: calc(40rem / var(--scale-ratio));
+  --h2-line-height: 80%;
+  --h2-letter-spacing: -0.1rem;
+
+  --p1-size: calc(14rem / var(--scale-ratio));
+  --p1-line-height: 107.143%;
+  --p1-letter-spacing: -0.02625rem;
+
+  --l1-size: 1rem;
+  --l1-line-height: 100%;
+  --l1-letter-spacing: -0.016em;
+
+  /* ---- global colours ------------------------------------------------ */
+  --black-100: #000;
+  --black-50: #00000080;
+  --black-30: #0000004d;
+  --black-10: #0000001a;
+  --black-5: #0000000d;
+
+  --white-100: #fff;
+  --white-50: #ffffff80;
+  --white-30: #ffffff4d;
+  --white-10: #ffffff1a;
+  --white-5: #ffffff0d;
+
+  --gray-200: #cbcccd;
+  --gray-150: #d8d9da;
+  --gray-075: #e6e6e6;
+
+  --success: #1ba64b;
+  --alert: #ffa800;
+  --error: #e23d3d;
+
+  /* ---- motion -------------------------------------------------------- */
+  --dur-xs: 0.2s;
+  --dur-s: 0.4s;
+  --dur-m: 0.8s;
+  --dur-l: 1.2s;
+  --stagger: 0.1s;
+
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-write: cubic-bezier(0.333, 0, 0.667, 1);
+  /* used by the projects marquee — from hirotos.com */
+  --ease-zoom: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- mobile: 393px design width --------------------------------------- */
+@media screen and (max-width: 991px) {
+  :root {
+    --scale-ratio: 3.93;
+    --cell: calc(162rem / var(--scale-ratio));
+    --grid-gap: var(--u-12);
+
+    --h1-size: calc(45rem / var(--scale-ratio));
+    --h1-line-height: 90%;
+    --h1-letter-spacing: -0.6rem;
+
+    --p1-size: calc(12rem / var(--scale-ratio));
+    --p1-line-height: 100%;
+  }
+}
+
+/* ---- themes ------------------------------------------------------------ *
+ * Five modes. `--bg` paints the page; content stays black in every theme,
+ * exactly as the reference does.
+ * ----------------------------------------------------------------------- */
+
+.theme-base {
+  --bg: #ffffff;
+  --bg-075: #f2f2f2;
+  --bg-150: #e6e6e6;
+  --bg-200: #d9d9d9;
+}
+
+.theme-1 {
+  --bg: #bec1ca;
+  --bg-075: #b0b3bb;
+  --bg-150: #a2a4ac;
+  --bg-200: #989aa2;
+}
+
+.theme-2 {
+  --bg: #ff633d;
+  --bg-075: #ec5c38;
+  --bg-150: #d95434;
+  --bg-200: #cc4f31;
+}
+
+.theme-3 {
+  --bg: #919e44;
+  --bg-075: #86923f;
+  --bg-150: #7b863a;
+  --bg-200: #747e36;
+}
+
+.theme-4 {
+  --bg: #c31f26;
+  --bg-075: #b41d23;
+  --bg-150: #a61a20;
+  --bg-200: #9c191e;
+}
+
+:root {
+  --content-primary: var(--black-100);
+  --content-secondary: var(--black-50);
+  --content-tertiary: var(--black-50);
+  --content-inverse: var(--white-100);
+  --fill-primary: var(--black-100);
+  --fill-tertiary: var(--black-10);
+  --border-100: var(--black-100);
+  --border-10: var(--black-10);
+}

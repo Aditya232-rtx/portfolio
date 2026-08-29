@@ -1,0 +1,50 @@
+/**
+ * Fixed footer name. The two halves sit pinned to opposite edges, then snap
+ * together at the very bottom of the page.
+ * See docs/REFERENCE.md §8.6.
+ */
+
+.sticky {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: calc(104rem / var(--scale-ratio));
+  pointer-events: none;
+}
+
+/**
+ * Anchored to the horizontal centre so that shrinking the width pulls both
+ * halves inward symmetrically — the name closes up in the middle of the page,
+ * not against the left edge.
+ *
+ * Widths are percentages of the full-bleed parent so they stay correct at any
+ * viewport: 1408/1440 = 97.778% at rest, 424/1440 = 29.444% collapsed.
+ */
+.inner {
+  position: absolute;
+  bottom: calc(16rem / var(--scale-ratio));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 97.778%;
+  opacity: 0;
+}
+
+.part {
+  color: var(--content-primary);
+  opacity: 0.22;
+  white-space: nowrap;
+}
+
+.meta {
+  position: absolute;
+  bottom: calc(12rem / var(--scale-ratio));
+  left: var(--u-16);
+  right: var(--u-16);
+  display: flex;
+  justify-content: space-between;
+  color: var(--content-primary);
+}

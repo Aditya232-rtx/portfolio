@@ -1,0 +1,119 @@
+/**
+ * Achievements table — the reference's awards layout.
+ * Heading staggers across columns 2–4; rows are 4 cells with a hairline under
+ * each and the whole row filling on hover.
+ * See docs/REFERENCE.md §8.4.
+ */
+
+.section {
+  padding-block: var(--u-120);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-inline: var(--page-padding);
+}
+
+/* ---- heading ----------------------------------------------------------- */
+
+/* Staggered stack: measured at x = 372, 194, 372, 550 in the reference. */
+.headingWrap {
+  grid-column: 1 / span 8;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  margin-bottom: var(--u-96);
+}
+
+.headingLine:nth-child(1) {
+  grid-column: 3 / span 4;
+}
+.headingLine:nth-child(2) {
+  grid-column: 2 / span 2;
+}
+.headingLine:nth-child(3) {
+  grid-column: 3 / span 4;
+}
+.headingLine:nth-child(4) {
+  grid-column: 4 / span 4;
+}
+
+/* ---- table ------------------------------------------------------------- */
+
+.table {
+  grid-column: 2 / span 6;
+  margin-bottom: var(--u-96);
+}
+
+.group {
+  margin-bottom: var(--u-32);
+}
+
+.row {
+  display: grid;
+  /* year | context | org | result — matching the reference's cell widths. */
+  grid-template-columns:
+    calc(178rem / var(--scale-ratio))
+    calc(356rem / var(--scale-ratio))
+    minmax(0, 1fr)
+    calc(178rem / var(--scale-ratio));
+  align-items: center;
+  min-height: calc(23rem / var(--scale-ratio));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cell {
+  padding: var(--u-4) var(--u-4);
+  transition: background var(--dur-s) var(--ease-out);
+}
+
+/* Fill lands instantly and releases slowly, as the reference does. */
+@media (min-width: 992px) {
+  .row:hover .cell {
+    background: var(--fill-tertiary);
+    transition: background 0s;
+  }
+}
+
+/* Only the group's first row carries the year and context. */
+.year {
+  color: var(--content-primary);
+}
+
+.context {
+  color: var(--content-primary);
+}
+
+.org {
+  position: relative;
+  color: var(--content-primary);
+}
+
+.result {
+  color: var(--content-primary);
+}
+
+@media (max-width: 991px) {
+  .table {
+    grid-column: 1 / -1;
+  }
+
+  .headingLine:nth-child(1),
+  .headingLine:nth-child(2),
+  .headingLine:nth-child(3),
+  .headingLine:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+
+  .row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: var(--u-4);
+    padding-block: var(--u-8);
+  }
+
+  .certificate {
+    display: none;
+  }
+}

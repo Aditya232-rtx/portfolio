@@ -1,0 +1,42 @@
+/**
+ * Custom scrollbar — 8px track at the right edge, 4×16 thumb, auto-hides after
+ * 1s idle. See docs/REFERENCE.md §9.
+ */
+
+.wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  width: var(--u-8);
+  padding: var(--u-4) 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.thumb {
+  width: var(--u-4);
+  height: var(--u-16);
+  margin-inline: auto;
+  background: var(--content-primary);
+  border-radius: 999px;
+  cursor: grab;
+  pointer-events: auto;
+  transition: width 0.2s var(--ease-out);
+}
+
+.thumb:hover,
+.thumb[data-dragging] {
+  width: var(--u-6);
+}
+
+.thumb[data-dragging] {
+  cursor: grabbing;
+}
+
+@media (max-width: 991px) {
+  .wrap {
+    display: none;
+  }
+}

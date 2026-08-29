@@ -1,0 +1,193 @@
+/**
+ * Footer. Measured positions in docs/REFERENCE.md §8.5 — the quote staggers
+ * left/right and the clock row reads ( HH : [mark] : MM ).
+ */
+
+.footer {
+  position: relative;
+  padding-block: var(--u-120) var(--u-144);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  padding-inline: var(--page-padding);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.quoteA {
+  grid-column: 3 / span 4;
+}
+
+.quoteB {
+  grid-column: 4 / span 4;
+  margin-top: var(--u-24);
+}
+
+/* Right-hand half is aligned to its right edge, mirroring the left. */
+.quoteC {
+  grid-column: 3 / span 4;
+  align-items: flex-end;
+  margin-top: var(--u-96);
+}
+
+.quoteD {
+  grid-column: 4 / span 4;
+  align-items: flex-end;
+  margin-top: var(--u-24);
+}
+
+/* ---- clock ------------------------------------------------------------- */
+
+.time {
+  grid-column: 1 / span 8;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: center;
+  margin-block: var(--u-96);
+}
+
+.paren {
+  justify-self: end;
+}
+
+.hours {
+  grid-column: 2;
+}
+
+.colonA {
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* The 192×264 mark cell between the colons. */
+.markCell {
+  grid-column: 4 / span 2;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 192 / 264;
+  color: var(--white-100);
+  background: var(--black-100);
+}
+
+.markCell svg {
+  width: 40%;
+  height: 40%;
+}
+
+.colonB {
+  grid-column: 6;
+}
+
+.minutes {
+  grid-column: 7;
+  justify-self: end;
+}
+
+/* ---- contact ----------------------------------------------------------- */
+
+.mail {
+  grid-column: 3 / span 2;
+  margin-top: var(--u-96);
+}
+
+.prompt {
+  margin-top: var(--u-24);
+  opacity: 0.5;
+}
+
+.mailLink {
+  display: inline-block;
+  margin-top: var(--u-6);
+  padding: var(--u-4) var(--u-8);
+  margin-left: calc(var(--u-8) * -1);
+  transition:
+    background 0.3s var(--ease-out),
+    color 0.3s var(--ease-out);
+}
+
+.mailLink:hover {
+  color: var(--bg);
+  background: var(--fill-primary);
+}
+
+/* ---- socials ----------------------------------------------------------- */
+
+.socials {
+  grid-column: 3 / span 4;
+  display: flex;
+  justify-content: center;
+  gap: var(--u-8);
+  margin-top: var(--u-96);
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: calc(64rem / var(--scale-ratio));
+  height: calc(64rem / var(--scale-ratio));
+  border: var(--stroke) solid var(--border-100);
+  border-radius: 999px;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.social:hover {
+  transform: scale(0.9);
+  color: var(--bg);
+  background: var(--fill-primary);
+}
+
+.social svg {
+  width: calc(15rem / var(--scale-ratio));
+  height: calc(15rem / var(--scale-ratio));
+  fill: currentColor;
+}
+
+@media (max-width: 991px) {
+  .quoteA,
+  .quoteB,
+  .quoteC,
+  .quoteD,
+  .mail,
+  .socials {
+    grid-column: 1 / -1;
+  }
+
+  .quoteC,
+  .quoteD {
+    align-items: flex-start;
+  }
+
+  .time {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .hours {
+    grid-column: 1;
+  }
+  .colonA {
+    grid-column: 2;
+  }
+  .markCell {
+    grid-column: 2 / span 2;
+  }
+  .colonB {
+    grid-column: 4;
+  }
+  .minutes {
+    grid-column: 4;
+  }
+
+  .socials {
+    justify-content: flex-start;
+  }
+}

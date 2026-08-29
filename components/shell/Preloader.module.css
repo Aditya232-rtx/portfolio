@@ -1,0 +1,43 @@
+/**
+ * Preloader. Progress block grows over 4s while a counter runs to 100%, then
+ * the block clip-reveals the ⌘ mark.
+ * See docs/REFERENCE.md §7.
+ */
+
+.progress {
+  position: relative;
+  /* Row 1 of the hero grid, beside the meta block. Must be explicit: the hero
+     declares fixed rows, so auto-placement would push this past the last one. */
+  grid-column: 3;
+  grid-row: 1;
+  width: calc(120rem / var(--scale-ratio));
+  height: calc(120rem / var(--scale-ratio));
+}
+
+/* The black block that grows top-down before the mark appears. */
+.block {
+  position: absolute;
+  inset: 0;
+  height: 0%;
+  background: var(--black-100);
+}
+
+.mark {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--content-primary);
+  visibility: hidden;
+  clip-path: inset(0% 0% 100% 0%);
+}
+
+/* Giant % counter, bottom-left. */
+.count {
+  position: fixed;
+  left: var(--u-16);
+  bottom: var(--u-16);
+  z-index: 60;
+  color: var(--content-primary);
+  pointer-events: none;
+}

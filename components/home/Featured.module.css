@@ -1,0 +1,104 @@
+/**
+ * Featured section — "Work 24-26" framing the project globe.
+ *
+ * Every value here is read from the live reference (bleibtgleich.dev) via
+ * computed styles, not estimated:
+ *
+ *   .featured / .featured-inner   height 1768, padding 450px 16px 200px
+ *   [data-featured="heading"]     position sticky, top 450, z 2,
+ *                                 display flex, justify-content space-between,
+ *                                 align-items center, gap 16, width 375 (natural)
+ *   [data-featured="globe"]       728×728, margin-top 144
+ *
+ * The heading is *sticky*, so it holds its place on screen while the globe
+ * scrolls past underneath. Its width is what animates (see Featured.tsx) —
+ * with `justify-content: space-between`, widening the box is what drives the
+ * two words apart to the edges and back.
+ */
+
+.section {
+  position: relative;
+}
+
+/**
+ * The tall top padding is what gives the sticky heading room to travel, and
+ * the 200px bottom padding is the settle space after the globe.
+ * 450 + 158 (heading) + 144 (globe margin) + 728 (globe) + 200 ≈ 1768.
+ */
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: calc(450rem / var(--scale-ratio)) var(--page-padding)
+    calc(200rem / var(--scale-ratio));
+}
+
+.heading {
+  position: sticky;
+  top: calc(450rem / var(--scale-ratio));
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u-16);
+  /* Width is set from JS to the measured natural width, then animated. */
+}
+
+.word {
+  color: var(--content-primary);
+  white-space: nowrap;
+}
+
+/* 728×728 with a 144 top margin, straight from the reference. */
+.globe {
+  width: calc(728rem / var(--scale-ratio));
+  height: calc(728rem / var(--scale-ratio));
+  margin-top: calc(144rem / var(--scale-ratio));
+  max-width: 90vw;
+  touch-action: none;
+}
+
+/**
+ * Hidden until the heading finishes its widen-and-return, at which point JS
+ * swaps it in for the two words. Never visible on arrival.
+ */
+.linkWrap {
+  display: none;
+}
+
+.link {
+  display: inline;
+  color: var(--content-primary);
+  white-space: nowrap;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 87%;
+  background-repeat: no-repeat;
+  background-size: 100% 0.35rem;
+  transition: background-size 0.6s var(--ease-in-out);
+}
+
+@media (min-width: 992px) {
+  .link:hover {
+    background-size: 0% 0.3rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .inner {
+    padding: var(--u-64) var(--page-padding);
+  }
+
+  /* No width animation on mobile, so no sticky travel to reserve space for. */
+  .heading {
+    position: static;
+    justify-content: center;
+  }
+
+  .globe {
+    width: 86vw;
+    height: 86vw;
+    margin-top: var(--u-32);
+  }
+}

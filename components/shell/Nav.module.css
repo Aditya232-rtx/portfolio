@@ -1,0 +1,145 @@
+/**
+ * Nav + the descending staircase menu.
+ * See docs/REFERENCE.md §8.1 and §10.1 for the measured geometry.
+ */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  height: calc(39rem / var(--scale-ratio));
+}
+
+/* 16×16 dev-grid toggle at (16,19) */
+.gridToggle {
+  position: absolute;
+  top: calc(19rem / var(--scale-ratio));
+  left: var(--u-16);
+  width: var(--u-16);
+  height: var(--u-16);
+  padding: 0;
+  border: 0;
+  background: var(--black-5);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.gridToggle:hover {
+  background: var(--black-10);
+}
+
+/* 51×23 black pill at (1373,16) */
+.button {
+  position: absolute;
+  top: var(--u-16);
+  right: var(--u-16);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  min-width: calc(51rem / var(--scale-ratio));
+  height: calc(23rem / var(--scale-ratio));
+  padding: 0 var(--u-10);
+  color: var(--white-100);
+  background: var(--black-100);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* ---- menu -------------------------------------------------------------- */
+
+/* Occupies the right half: x 720 → 1440 at the design width. */
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 50%;
+  pointer-events: none;
+}
+
+.link {
+  position: relative;
+  display: block;
+  width: calc(240rem / var(--scale-ratio));
+  padding: var(--u-16);
+  pointer-events: auto;
+  /* Hidden until the open timeline runs. */
+  clip-path: inset(0% 0% 100% 0%);
+}
+
+/* Descending staircase — each step shorter and one shade lighter. */
+.link:nth-child(1) {
+  height: calc(360rem / var(--scale-ratio));
+  background: var(--gray-200);
+}
+
+.link:nth-child(2) {
+  height: calc(280rem / var(--scale-ratio));
+  background: var(--gray-150);
+}
+
+.link:nth-child(3) {
+  height: calc(216rem / var(--scale-ratio));
+  background: var(--gray-075);
+}
+
+.indicator {
+  display: grid;
+  place-items: center;
+  width: calc(23rem / var(--scale-ratio));
+  height: calc(23rem / var(--scale-ratio));
+  border: var(--stroke) solid var(--black-100);
+  border-radius: 999px;
+}
+
+.indicatorCurrent {
+  color: var(--white-100);
+  background: var(--black-100);
+}
+
+/* Label sits at the bottom-left of its panel, making a descending diagonal. */
+.linkLabel {
+  position: absolute;
+  left: var(--u-16);
+  bottom: var(--u-16);
+}
+
+/* "Experiments" pinned to the viewport bottom, under the second column. */
+.archive {
+  position: fixed;
+  bottom: 0;
+  right: calc(240rem / var(--scale-ratio));
+  z-index: 51;
+  display: grid;
+  align-items: center;
+  width: calc(240rem / var(--scale-ratio));
+  height: calc(39rem / var(--scale-ratio));
+  padding: 0 var(--u-16);
+  background: var(--gray-150);
+  pointer-events: auto;
+  transform: translateY(100%);
+}
+
+@media (max-width: 991px) {
+  .menu {
+    width: 100%;
+  }
+
+  .link {
+    flex: 1;
+    width: auto;
+  }
+
+  .archive {
+    right: 0;
+    width: 100%;
+  }
+}
