@@ -55,6 +55,54 @@ export const CONTACT = {
   subject: '[Project Inquiry] Hello, Aditya!',
 } as const
 
+export const CONTACT_PAGE = {
+  hero: ['Say hi.', 'No need', 'to be', 'shy.'],
+  tagline: 'Talk to your engineer',
+  intro:
+    'I read every message. If you have a system to ship, an idea to prototype, or a hard problem worth chasing — send it over.',
+  columns: {
+    social: {
+      label: 'Social',
+      items: [
+        { label: 'GH', href: 'https://github.com/Aditya232-rtx' },
+        { label: 'LI', href: 'https://www.linkedin.com/in/adityajadhav55' },
+        { label: 'X', href: 'https://x.com/jadhavadityaa' },
+        { label: 'IG', href: 'https://www.instagram.com/can.adityaa' },
+      ],
+    },
+    contacts: {
+      label: 'Contacts',
+      items: [
+        { label: 'jadhavaditya0723@gmail.com', href: 'mailto:jadhavaditya0723@gmail.com' },
+      ],
+    },
+    location: {
+      label: 'Location',
+      lines: ['Based in India', 'Working across time zones', 'GMT +5:30'],
+    },
+  },
+  marquee: 'Say hi',
+  form: {
+    intro: 'Hello Aditya,',
+    fields: [
+      { key: 'name', prefix: "I'm", placeholder: 'your name' },
+      { key: 'email', prefix: 'here is my email', placeholder: 'you@company.com' },
+      {
+        key: 'source',
+        prefix: 'I heard about you via',
+        placeholder: 'referral, GitHub, LinkedIn…',
+      },
+      { key: 'need', prefix: 'I need your help with', placeholder: 'backend, agents, data…' },
+      {
+        key: 'project',
+        prefix: 'here is my project',
+        placeholder: 'a link or one line about it',
+      },
+    ],
+    submit: "Let's talk",
+  },
+} as const
+
 export type Social = {
   readonly name: string
   readonly href: string
