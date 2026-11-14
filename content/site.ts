@@ -55,6 +55,20 @@ export const CONTACT = {
   subject: '[Project Inquiry] Hello, Aditya!',
 } as const
 
+export type Social = {
+  readonly name: string
+  readonly href: string
+  /** Key into ICONS in components/icons.tsx */
+  readonly icon: 'instagram' | 'x' | 'linkedin' | 'github'
+}
+
+export const SOCIALS: readonly Social[] = [
+  { name: 'GitHub', href: 'https://github.com/Aditya232-rtx', icon: 'github' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adityajadhav55', icon: 'linkedin' },
+  { name: 'X', href: 'https://x.com/jadhavadityaa', icon: 'x' },
+  { name: 'Instagram', href: 'https://www.instagram.com/can.adityaa', icon: 'instagram' },
+] as const
+
 export const CONTACT_PAGE = {
   hero: ['Say hi.', 'No need', 'to be', 'shy.'],
   tagline: 'Talk to your engineer',
@@ -63,12 +77,7 @@ export const CONTACT_PAGE = {
   columns: {
     social: {
       label: 'Social',
-      items: [
-        { label: 'GH', href: 'https://github.com/Aditya232-rtx' },
-        { label: 'LI', href: 'https://www.linkedin.com/in/adityajadhav55' },
-        { label: 'X', href: 'https://x.com/jadhavadityaa' },
-        { label: 'IG', href: 'https://www.instagram.com/can.adityaa' },
-      ],
+      items: SOCIALS.map(({ name, href }) => ({ label: name, href })),
     },
     contacts: {
       label: 'Contacts',
@@ -103,27 +112,11 @@ export const CONTACT_PAGE = {
   },
 } as const
 
-export type Social = {
-  readonly name: string
-  readonly href: string
-  /** Key into ICONS in components/icons.tsx */
-  readonly icon: 'instagram' | 'x' | 'linkedin' | 'github'
-}
-
-export const SOCIALS: readonly Social[] = [
-  { name: 'GitHub', href: 'https://github.com/Aditya232-rtx', icon: 'github' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adityajadhav55', icon: 'linkedin' },
-  { name: 'X', href: 'https://x.com/jadhavadityaa', icon: 'x' },
-  { name: 'Instagram', href: 'https://www.instagram.com/can.adityaa', icon: 'instagram' },
-] as const
-
 export const NAV_LINKS = [
   { label: 'Home', href: '/', index: '1' },
   { label: 'Work', href: '/work', index: '2' },
   { label: 'Contact', href: '/contact', index: '3' },
 ] as const
-
-export const NAV_SECONDARY = { label: 'Experiments', href: '/archive' } as const
 
 export const FEATURED = {
   title: ['Work', '24-26'],

@@ -81,31 +81,31 @@ export function Intro({ onPreloaderDone }: { onPreloaderDone: () => void }) {
           {IDENTITY.role[1]}
         </div>
 
-        <div className={`${styles.name} ${styles.group}`}>
-          {HERO_HEADINGS.name.map((line) => (
-            <h1 key={line} className="h1" data-reveal="text">
-              {line}
-            </h1>
+        <h1 className={`${styles.name} ${styles.group}`}>
+          {HERO_HEADINGS.name.map((line, index) => (
+            <span key={line} className="h1" data-reveal="text">
+              {index > 0 ? ' ' : null}{line}
+            </span>
           ))}
-        </div>
+        </h1>
 
         <div className={`${styles.groupA} ${styles.group}`}>
           {HERO_HEADINGS.groups[0].map((line) => (
-            <h1 key={line} className="h1" data-reveal="text">
+            <p key={line} className="h1" data-reveal="text">
               {line}
-            </h1>
+            </p>
           ))}
         </div>
 
         <div className={`${styles.groupB} ${styles.group}`}>
           {HERO_HEADINGS.groups[1].map((line, i, all) => (
-            <h1
+            <p
               key={line}
               className={`h1 ${i === all.length - 1 ? styles.offsetLine : ''}`}
               data-reveal="text"
             >
               {line}
-            </h1>
+            </p>
           ))}
         </div>
 
