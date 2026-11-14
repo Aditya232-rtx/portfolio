@@ -1,13 +1,17 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FEATURED } from '@/content/site'
 import { registerMotion } from '@/lib/motion/constants'
-import { Globe } from './Globe'
 import styles from './Featured.module.css'
+
+const Globe = dynamic(() => import('./Globe').then((module) => module.Globe), {
+  ssr: false,
+})
 
 /**
  * "Work 24-26" framing the project globe.
@@ -43,6 +47,22 @@ const SWAP_PROGRESS = 0.99
 
 export function Featured() {
   const sectionRef = useRef<HTMLElement>(null)
+  const globeRef = useRef<HTMLDivElement>(null)
+  const [loadGlobe, setLoadGlobe] = useState(false)
+
+  useEffect(() => {
+    const globe = globeRef.current
+    if (!globe) return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return
+      setLoadGlobe(true)
+      observer.disconnect()
+    }, { rootMargin: '400px 0px' })
+
+    observer.observe(globe)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const section = sectionRef.current
@@ -137,7 +157,12 @@ export function Featured() {
           </div>
         </div>
 
-        <Globe className={styles.globe} />
+        <div ref={globeRef} className={styles.globe}>
+          {loadGlobe && <Globe className={styles.globeCanvas} />}
+        </div>
+        <Link href="/work" className={`${styles.link} p1`}>
+          Explore selected projects
+        </Link>
       </div>
     </section>
   )

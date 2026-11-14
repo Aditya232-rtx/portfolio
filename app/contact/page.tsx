@@ -1,11 +1,11 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import { ContactClient } from './ContactClient'
 
-export const metadata: Metadata = {
-  title: 'Contact — Aditya Jadhav',
-  description:
-    'Say hi. Send a project, an idea, or a hard problem worth chasing — I read every message.',
-}
+export const metadata = pageMetadata(
+  '/contact',
+  'Contact',
+  'Contact Aditya Jadhav about backend engineering, AI agents, or data projects. Find his email and official GitHub, LinkedIn, and Instagram profiles.',
+)
 
 export default function ContactPage() {
   return <ContactClient />

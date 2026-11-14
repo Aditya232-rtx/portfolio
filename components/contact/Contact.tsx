@@ -58,18 +58,18 @@ export function Contact() {
         <p className={`${styles.eyebrow} p1`} data-reveal="text">
           {CONTACT_PAGE.tagline}
         </p>
-        <div className={styles.heroLines}>
+        <h1 className={styles.heroLines}>
           {CONTACT_PAGE.hero.map((line, i) => (
-            <h1
+            <span
               key={line}
               className={`${styles.heroLine} h1`}
               data-reveal="text"
               style={{ marginLeft: `${i * 6}vw` }}
             >
-              {line}
-            </h1>
+              {i > 0 ? ' ' : null}{line}
+            </span>
           ))}
-        </div>
+        </h1>
         <p className={`${styles.intro} p1`} data-reveal="text">
           {CONTACT_PAGE.intro}
         </p>

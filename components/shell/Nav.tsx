@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { gsap } from 'gsap'
-import { NAV_LINKS, NAV_SECONDARY } from '@/content/site'
+import { NAV_LINKS } from '@/content/site'
 import { DUR, STAGGER } from '@/lib/motion/constants'
 import styles from './Nav.module.css'
 
@@ -17,7 +17,6 @@ export function Nav({ onToggleGrid }: { onToggleGrid: () => void }) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
   const panelsRef = useRef<HTMLDivElement>(null)
-  const archiveRef = useRef<HTMLAnchorElement>(null)
   const timeline = useRef<gsap.core.Timeline | null>(null)
 
   const isCurrent = (href: string) =>
@@ -25,7 +24,6 @@ export function Nav({ onToggleGrid }: { onToggleGrid: () => void }) {
 
   const animate = useCallback((next: boolean) => {
     const panels = panelsRef.current?.querySelectorAll(`.${styles.link}`)
-    const archive = archiveRef.current
     if (!panels?.length) return
 
     timeline.current?.kill()
@@ -41,19 +39,9 @@ export function Nav({ onToggleGrid }: { onToggleGrid: () => void }) {
         // Rightmost panel leads.
         stagger: { amount: STAGGER * panels.length, from: 'end' },
       })
-      if (archive) {
-        tl.to(
-          archive,
-          { yPercent: 0, duration: DUR.m, ease: 'Out', overwrite: 'auto' },
-          `-=${DUR.m * 0.5}`,
-        )
-      }
       return
     }
 
-    if (archive) {
-      tl.to(archive, { yPercent: 100, duration: DUR.s, ease: 'In' }, 0)
-    }
     tl.to(
       panels,
       {
@@ -144,16 +132,6 @@ export function Nav({ onToggleGrid }: { onToggleGrid: () => void }) {
             </Link>
           ))}
         </div>
-
-        <Link
-          ref={archiveRef}
-          href={NAV_SECONDARY.href}
-          className={`${styles.archive} p1`}
-          tabIndex={open ? 0 : -1}
-          aria-hidden={!open}
-        >
-          {NAV_SECONDARY.label}
-        </Link>
       </div>
     </nav>
   )

@@ -60,6 +60,11 @@
   touch-action: none;
 }
 
+.globeCanvas {
+  width: 100%;
+  height: 100%;
+}
+
 /**
  * Hidden until the heading finishes its widen-and-return, at which point JS
  * swaps it in for the two words. Never visible on arrival.

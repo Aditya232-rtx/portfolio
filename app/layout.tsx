@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter_Tight } from 'next/font/google'
-import { IDENTITY } from '@/content/site'
+import { FULL_NAME, HOME_TITLE, SITE_ORIGIN } from '@/lib/seo'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { PreloaderReadyProvider } from '@/components/providers/PreloaderReadyProvider'
@@ -19,45 +19,11 @@ const interTight = Inter_Tight({
   display: 'swap',
 })
 
-const NAME = `${IDENTITY.firstName} ${IDENTITY.lastName}`
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://jadhavaditya.com'),
+  metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: `${NAME} — Software Developer`,
-    template: `%s | ${NAME}`,
-  },
-  description:
-    'Software developer building backend services, agent systems and data pipelines, with a focus on correctness, observability and production reliability.',
-  alternates: {
-    canonical: '/',
-  },
-  icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
-    apple: [{ url: '/apple-icon.svg', type: 'image/svg+xml' }],
-  },
-  openGraph: {
-    title: `${NAME} — Software Developer`,
-    description:
-      'Backend services, agent systems and data pipelines built for production.',
-    url: 'https://jadhavaditya.com',
-    siteName: `${NAME} — Portfolio`,
-    type: 'website',
-    locale: 'en_IN',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${NAME} — Software Developer`,
-    description:
-      'Backend services, agent systems and data pipelines built for production.',
-    creator: '@jadhavadityaa',
-  },
-  robots: {
-    index: true,
-    follow: true,
+    default: HOME_TITLE,
+    template: `%s | ${FULL_NAME}`,
   },
 }
 
@@ -69,6 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={interTight.variable}>
       <body className="theme-base">
+        <noscript>
+          <style>{'[data-reveal] { visibility: visible } [data-preloader="count"] { display: none }'}</style>
+        </noscript>
         <ThemeProvider>
           <SmoothScrollProvider>
             <PreloaderReadyProvider>

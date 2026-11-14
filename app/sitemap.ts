@@ -1,20 +1,7 @@
 import type { MetadataRoute } from 'next'
+import { NAV_LINKS } from '@/content/site'
+import { SITE_ORIGIN } from '@/lib/seo'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://jadhavaditya.com'
-  const now = new Date()
-  return [
-    {
-      url: base,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${base}/work`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-  ]
+  return NAV_LINKS.map(({ href }) => ({ url: new URL(href, SITE_ORIGIN).href }))
 }
