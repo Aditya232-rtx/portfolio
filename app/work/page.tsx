@@ -1,5 +1,6 @@
 import { PROJECTS } from '@/content/site'
 import { pageMetadata } from '@/lib/seo'
+import Link from 'next/link'
 import { WorkClient } from './WorkClient'
 import styles from './Work.module.css'
 
@@ -18,10 +19,11 @@ export default function WorkPage() {
         <ul>
           {PROJECTS.map(({ id, name, blurb, role, href }) => (
             <li key={id}>
-              <h3 className="p1">{name}</h3>
+              <h3 className="p1"><Link href={`/work/${id}`}>{name}</Link></h3>
               <p className="p1">{blurb}</p>
               <p className="p1">Role: {role}</p>
-              {href && <a className="p1" href={href}>View {name} ↗</a>}
+              <Link className="p1" href={`/work/${id}`}>Project details</Link>
+              {href && <a className="p1" href={href} target="_blank" rel="noreferrer">Visit {name} ↗</a>}
             </li>
           ))}
         </ul>

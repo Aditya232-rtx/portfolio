@@ -15,9 +15,9 @@ export const IDENTITY = {
   location: 'Based in India',
   workingWith: { label: 'Working w/', name: 'Open Source', href: '#' },
   bio: [
-    'Builds backend services, agent systems and',
-    'data pipelines — with a focus on correctness,',
-    'observability and what holds up in production.',
+    'Software developer in India building backend',
+    'services, AI agents and data pipelines —',
+    'focused on reliability in production.',
   ],
   copyright: "© '26",
   metaLeft: "'26 © All Right Reserved",
@@ -143,6 +143,8 @@ export type ProjectKind = 'product' | 'learning'
 export type Project = {
   readonly id: string
   readonly name: string
+  /** Plain-language search phrase that best describes this project. */
+  readonly focus: string
   readonly year: string
   readonly status: ProjectStatus
   readonly kind: ProjectKind
@@ -169,6 +171,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'thirddoor',
     name: 'ThirdDoor',
+    focus: 'AI discovery platform',
     year: '2026',
     status: 'building',
     kind: 'product',
@@ -189,6 +192,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'spillthereel',
     name: 'SpillTheReel',
+    focus: 'searchable saved videos',
     year: '2026',
     status: 'building',
     kind: 'product',
@@ -209,6 +213,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'crowdshield',
     name: 'CrowdShield',
+    focus: 'crowd safety system',
     year: '2026',
     status: 'production',
     kind: 'learning',
@@ -228,6 +233,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'credexa',
     name: 'Credexa',
+    focus: 'document verification',
     year: '2026',
     status: 'production',
     kind: 'learning',
@@ -249,6 +255,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'ouroboros',
     name: 'Ouroboros — Product',
+    focus: 'AI security agents',
     year: '2026',
     status: 'production',
     kind: 'learning',
@@ -268,6 +275,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'drishtikosh',
     name: 'Drishtikosh',
+    focus: 'accessible AI learning',
     year: '2026',
     status: 'production',
     kind: 'learning',
@@ -290,6 +298,7 @@ export const PROJECTS: readonly Project[] = [
   {
     id: 'ouroboros-site',
     name: 'Ouroboros — Site',
+    focus: 'security product website',
     year: '2026',
     status: 'production',
     kind: 'learning',
