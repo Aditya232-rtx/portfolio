@@ -66,7 +66,10 @@ function blurNode(line: HTMLElement): SVGFEGaussianBlurElement | null {
 /** Split an element into lines and wire up its filters. Idempotent. */
 function ensureSplit(el: SplitTarget): SplitText {
   if (!el._split) {
-    el._split = new SplitText(el, { type: 'lines' })
+    // SplitText's default `aria: "auto"` puts aria-label on the host node.
+    // Many reveal targets are generic div/span elements, where that attribute
+    // is not permitted. Keep the actual split text exposed in the tree instead.
+    el._split = new SplitText(el, { type: 'lines', aria: 'none' })
   }
   el._split.lines.forEach((line) => attachFilter(line as HTMLElement))
   return el._split
