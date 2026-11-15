@@ -1,0 +1,93 @@
+.page {
+  min-height: 100vh;
+  padding: var(--u-32) var(--page-padding) var(--u-96);
+}
+
+.page article,
+.breadcrumb {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+.breadcrumb,
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--u-8);
+}
+
+.breadcrumb {
+  margin-bottom: var(--u-96);
+  font-size: 0.9rem;
+}
+
+.breadcrumb a,
+.links a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.eyebrow,
+.role {
+  opacity: 0.7;
+}
+
+.page h1 {
+  margin-top: var(--u-16);
+  font-size: clamp(3rem, 10vw, 7rem);
+  line-height: 0.95;
+}
+
+.lede {
+  max-width: 44rem;
+  margin-top: var(--u-32);
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  line-height: 1.35;
+}
+
+.role {
+  margin-top: var(--u-16);
+}
+
+.section {
+  max-width: 48rem;
+  margin-top: var(--u-64);
+}
+
+.section h2 {
+  margin-bottom: var(--u-16);
+  font-size: 1.2rem;
+}
+
+.section p + p {
+  margin-top: var(--u-16);
+}
+
+.section p {
+  line-height: 1.65;
+}
+
+.tags,
+.links {
+  margin-top: var(--u-24);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u-8);
+  list-style: none;
+  padding: 0;
+}
+
+.tags li {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 0.35em 0.8em;
+  font-size: 0.9rem;
+}
+
+.links {
+  gap: var(--u-24);
+}
